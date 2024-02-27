@@ -1,42 +1,33 @@
-const formInput = document.querySelector(".feedback-form");
-const STORAGE_KEY = "feedback-form-state";
+const form = document.querySelector(".feedback-form");
+const email = form.elements.email;
+const message = form.elements.message;
+const localStorageKey = "feedback-form-state";
 
-// 1. Умова - прослуховувач input записує в локальне сховище
-// об'єкт з даними з форми
-
-formInput.addEventListener("input", (event) => {
-    const userEmail = formInput.email.value.trim();
-    const userMessage = formInput.message.value.trim();
-    const fillForm = {
-        email: userEmail,
-        message: userMessage,
-    }
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(fillForm));
-})
-
-// 2. Умова - при перезавантаженні сторінки беруться дані 
-// з локального сховища і відтворюються в полях форми, якщо
-// локальне сховище порожнє - форма порожня
-
-const savedData = localStorage.getItem(STORAGE_KEY);
-if (savedData) {
-    const parseData = JSON.parse(savedData);
-    formInput.email.value = parseData.email || "";
-    formInput.message.value = parseData.message || "";
+function getFormState(){
+    const storedState = localStorage.getItem(localStorageKey);
+    return storedState ? JSON.parse(storedState) : {};
 }
 
-// 3. Умова - прослуховувач submit виводить в консоль
-// об'єкт з даними з локального сховища, і обнуляє його.
-// Форма також обнуляється
+function saveFormState(){
+    const formState = {email: email.value.trim(), message: message.value.trim()};
+    localStorage.setItem(localStorageKey, JSON.stringify(formState));
+}
 
-formInput.addEventListener("submit", (event) => {
+const savedFormState = getFormState();
+email.value = savedFormState.email || "";
+message.value = savedFormState.message || "";
+
+form.addEventListener('input', (event) => {
+    saveFormState();
+})
+
+form.addEventListener('submit', (event) => {
     event.preventDefault();
-    if (!formInput.email.value.trim() ||
-        !formInput.message.value.trim()) {
-        alert("Всі поля повинні бути заповнені");
+    if (!email.value.trim() || !message.value.trim()) {
+        alert("Будь ласка, заповніть всі поля");
         return;
     }
-    console.table(JSON.parse(localStorage.getItem(STORAGE_KEY)));
-    localStorage.removeItem(STORAGE_KEY);
-    formInput.reset();
+    console.log({email: email.value.trim(), message: message.value.trim()})
+    localStorage.removeItem(localStorageKey);
+    form.reset();
 })
