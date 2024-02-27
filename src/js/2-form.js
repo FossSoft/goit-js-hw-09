@@ -1,33 +1,39 @@
-const form = document.querySelector(".feedback-form");
-const email = form.elements.email;
-const message = form.elements.message;
-const localStorageKey = "feedback-form-state";
+const STORAGE_KEY = 'feedback-form-state';
 
-function getFormState(){
-    const storedState = localStorage.getItem(localStorageKey);
-    return storedState ? JSON.parse(storedState) : {};
+const form = document.querySelector('.feedback-form');
+
+function readFormDate(form) {
+    const email = form.email.value.trim();
+    const message = form.message.value.trim();
+    return {
+        email,
+        message,
+    }
 }
-
-function saveFormState(){
-    const formState = {email: email.value.trim(), message: message.value.trim()};
-    localStorage.setItem(localStorageKey, JSON.stringify(formState));
-}
-
-const savedFormState = getFormState();
-email.value = savedFormState.email || "";
-message.value = savedFormState.message || "";
 
 form.addEventListener('input', (event) => {
-    saveFormState();
+    event.preventDefault();
+    const date = readFormDate(event.currentTarget);
+    const jsonDate = JSON.stringify(date);
+    localStorage.setItem(STORAGE_KEY, jsonDate);
 })
 
 form.addEventListener('submit', (event) => {
     event.preventDefault();
-    if (!email.value.trim() || !message.value.trim()) {
-        alert("Будь ласка, заповніть всі поля");
-        return;
+    const rowDate = localStorage.getItem(STORAGE_KEY);
+    const date = JSON.parse(rowDate);
+    if(date.email && date.message) {
+        console.log(date);
+        localStorage.removeItem(STORAGE_KEY);
+        form.reset();
+    } else {
+        alert('Аll form fields must be filled out!')
     }
-    console.log({email: email.value.trim(), message: message.value.trim()})
-    localStorage.removeItem(localStorageKey);
-    form.reset();
 })
+
+const rowDate = localStorage.getItem(STORAGE_KEY);
+if (rowDate) {
+    const date = JSON.parse(rowDate);
+    form.email.value = date.email;
+    form.message.value = date.message;
+}

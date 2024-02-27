@@ -1,28 +1,95 @@
-/**
-  |============================
-  | include css partials with
-  | default @import url()
-  |============================
-*/
-@import url("./1-gallery.css");
-@import url("./2-form.css");
+@import url('./reset.css');
 
-:root {
-  font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
-  font-size: 16px;
-  line-height: 24px;
-  font-weight: 400;
+nav ul {
+  display: flex;
+  flex-direction: row;
+  gap: 24px;
+  font-size: 24px;
+  font-weight: 800;
 
-  color: #242424;
-  background-color: rgba(255, 255, 255, 0.87);
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-text-size-adjust: 100%;
 }
 
-body{
-  background-color: #fafafa;
+.gallery {
+  width: 1440px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  justify-content: center;
+  padding-top: 24px;
+}
+
+.gallery-link:hover {
+  cursor: url(../img/cursor.png), pointer;
+}
+
+.gallery-image {
+  width: 360px;
+  height: 200px;
+}
+
+.feedback-form {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 24px;
+  margin-left: 24px;
+}
+
+label {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+}
+
+input {
+  width: 360px;
+  height: 40px;
+  border: 1px solid #808080;
+  border-radius: 4px;
+  padding: 8px 16px;
+  letter-spacing: 0.04em;
+  color: #2e2f42;
+}
+
+input:hover,
+input:focus {
+  border-color: #000000;
+  outline: transparent;
+}
+
+textarea {
+  width: 360px;
+  height: 80px;
+  resize: none;
+  border: 1px solid #808080;
+  border-radius: 4px;
+  padding: 8px 16px;
+  letter-spacing: 0.04em;
+}
+
+textarea:hover,
+textarea:focus {
+  border-color: #000000;
+  outline: transparent;
+}
+
+button {
+  width: 95px;
+  height: 40px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: #FFFFFF;
+  border-radius: 8px;
+  border: none;
+  margin-top: 8px;
+  padding: 8px 16px;
+  background: #4e75ff;
+}
+
+button:hover,
+button:focus {
+  background-color: #6c8cff;
+  outline: transparent;
 }
