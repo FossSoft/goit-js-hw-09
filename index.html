@@ -2,18 +2,32 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <!-- <link rel="icon" type="image/svg+xml" href="/favicon.svg" /> -->
+    <link rel="icon" type="image/svg+xml" href="/goit-js-hw-09/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>GoIt-JS-HW-09</title>
+    <title>Vanilla App Template</title>
     
-    <link rel="stylesheet" href="/goit-js-hw-09/assets/styles-b91f4cf8.css">
+    <script type="module" crossorigin src="/goit-js-hw-09/assets/modulepreload-polyfill-ec808ebb.js"></script>
+    <script type="module" crossorigin src="/goit-js-hw-09/assets/vendor-c9def49e.js"></script>
+    <script type="module" crossorigin src="/goit-js-hw-09/assets/1-gallery-fd8de677.js"></script>
+    <script type="module" crossorigin src="/goit-js-hw-09/assets/2-form-8af4dd3a.js"></script>
+    <link rel="stylesheet" href="/goit-js-hw-09/assets/vendor-8c8fa3ea.css">
+    <link rel="stylesheet" href="/goit-js-hw-09/assets/index-8f97d503.css">
   </head>
   <body>
-    <nav>
-      <ul>
-        <li><a href="./1-gallery.html">Gallery of pictures</a></li>
-        <li><a href="./2-form.html">Our Form</a></li>
-      </ul>
-    </nav>
+    <ul class="gallery"></ul>
+
+
+    <form class="feedback-form" autocomplete="off">
+    <label>
+      Email
+      <input type="email" name="email" autofocus />
+    </label>
+    <label>
+      Message
+      <textarea name="message" rows="8"></textarea>
+    </label>
+    <button type="submit">Submit</button>
+  </form>
+
   </body>
 </html>
